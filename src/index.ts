@@ -7,6 +7,7 @@ import cors from 'cors';
 
 import router from './router';
 import mongoose from 'mongoose';
+import logger from './logger/logger';
 
 const app = express();
 
@@ -21,13 +22,13 @@ app.use(bodyParser.json());
 const server = http.createServer(app);
 
 server.listen(8080, () => {
-  console.log('Server running on http://localhost:8080/');
+  logger.debug('Server running on http://localhost:8080/');
 });
 
 const MONGO_URL = ''; // DB URI
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
-mongoose.connection.on('error', (error: Error) => console.log(error));
+mongoose.connection.on('error', (error: Error) => logger.error('Server running on http://localhost:8080/'));
 
 app.use('/', router());

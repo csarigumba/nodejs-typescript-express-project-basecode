@@ -8,6 +8,7 @@ import cors from 'cors';
 import router from './router';
 import mongoose from 'mongoose';
 import logger from './logger/logger';
+import trace from './middleware/trace';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(cors({
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(trace);
 
 const server = http.createServer(app);
 
